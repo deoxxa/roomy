@@ -1,0 +1,50 @@
+<!DOCTYPE html>  <html> <head>   <title>index.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               index.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">roomy</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{};</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><code>roomy.parse(string)</code>
+
+</p>
+<p>The only argument is a string like <code>1LDK</code>. The return value is an object
+like the following:
+
+</p>
+<pre><code class="lang-json">{
+  &quot;rooms&quot;: 1,
+  &quot;living_room&quot;: true,
+  &quot;dining_room&quot;: true,
+  &quot;kitchen&quot;: true
+}</code></pre>
+             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">roomy</span><span class="p">.</span><span class="nx">parse</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">parse</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">parts</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\s+/g</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="sr">/(\D)/</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">match</span><span class="p">(</span><span class="sr">/^\d+$/</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">rooms</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">parts</span><span class="p">.</span><span class="nx">shift</span><span class="p">(),</span> <span class="mi">10</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">parts</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">part</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">part</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="s2">&quot;R&quot;</span><span class="o">:</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">rooms</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">rooms</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span> <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="s2">&quot;L&quot;</span><span class="o">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">living_room</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="s2">&quot;D&quot;</span><span class="o">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">dining_room</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="s2">&quot;K&quot;</span><span class="o">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">kitchen</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+      <span class="k">default</span><span class="o">:</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="k">return</span> <span class="nx">res</span><span class="p">;</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p><code>roomy.generate(object)</code>
+
+</p>
+<p>The only argument is an object with the same format as the output of <code>parse</code>.
+The return value is a string like <code>1LDK</code>.
+
+</p>
+             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">roomy</span><span class="p">.</span><span class="nx">generate</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">generate</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">rooms</span> <span class="o">?</span> <span class="nx">object</span><span class="p">.</span><span class="nx">rooms</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">living_room</span> <span class="o">?</span> <span class="s2">&quot;L&quot;</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">dining_room</span> <span class="o">?</span> <span class="s2">&quot;D&quot;</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nx">object</span><span class="p">.</span><span class="nx">kitchen</span> <span class="o">?</span> <span class="s2">&quot;K&quot;</span> <span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

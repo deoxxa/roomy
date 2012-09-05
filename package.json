@@ -1,0 +1,23 @@
+{
+  "name": "roomy",
+  "version": "0.0.0",
+  "description": "Parse Japanese real estate room descriptions like 1LDK into objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "vows --spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/deoxxa/roomy.git"
+  },
+  "keywords": [
+    "room",
+    "parse",
+    "japanese"
+  ],
+  "author": "Conrad Pankoff <deoxxa@fknsrs.biz> (http://www.fknsrs.biz/)",
+  "license": "BSD",
+  "devDependencies": {
+    "vows": "~0.6.4"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "roomy",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Parse Japanese real estate room descriptions like 1LDK into objects",
   "main": "index.js",
   "scripts": {
